@@ -1,0 +1,97 @@
+@import "mixins";
+
+@primary: #3B2B4E;
+@secondary: #75485F;
+@third: rgb(191, 113, 109);
+@forth: rgb(255, 159, 103);
+@fifth: rgb(255, 189, 101);
+
+.creation {
+    grid-area: creation;
+    background-color: @primary;
+    color: @fifth;
+
+    &__header {
+        height: 5%;
+        margin-bottom: 20px;
+    }
+
+    &__form {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        display: grid;
+        grid-template: 1.2% repeat(4, 1fr) 1.2% / 1.2% 1fr 20px 1fr 1.2%;
+        grid-template-areas:
+            ". . . . . "
+            ". name-input-box . radio . "
+            ". name-input-box . checkbox . "
+            ". name-input-box . . . "
+            ". name-input-box . buttons . "
+            ". . . . . ";
+
+
+    }
+
+    &__name-input-box {
+        display: flex;
+        flex-direction: column;
+        grid-area: name-input-box;
+    }
+
+    &__input-box {
+        display: flex;
+        flex-direction: column;
+
+        &+& {
+            margin-top: 15px;
+        }
+    }
+
+    &__input {
+        margin-top: 5px;
+        align-self: flex-end;
+        .TextInput(@primary, @forth, @fifth, 200px, 30px, @secondary, @third)
+    }
+
+    &__radio-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        grid-area: radio;
+    }
+
+    &__radio-woman {
+        margin-top: 10px;
+    }
+
+    &__radio {
+        .BetterRadioButton(@third, @fifth, @primary);
+    }
+
+    &__checkbox-box {
+        grid-area: checkbox;
+        display: flex;
+        margin: auto;
+    }
+
+    &__checkbox {
+        .BetterCheckBox(@third, @fifth);
+    }
+
+    &__button-box {
+        grid-area: buttons;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end
+    }
+
+    &__button {
+        .BetterInputButtons(@secondary, @primary, @forth);
+    }
+
+    &__label {
+        font-size: 1.3rem;
+    }
+}

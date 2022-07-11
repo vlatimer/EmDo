@@ -1,0 +1,114 @@
+.TextInput(@bg, @b, @c, @width, @height, @f, @bf) {
+    background-color: @bg;
+    border: 2px solid @b;
+    color: @c;
+    width: @width;
+    height: @height;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: 0.5s;
+    font-style: italic;
+
+    &:focus {
+        outline: none;
+        background-color: @f;
+        border-color: @bf;
+    }
+
+    &::-webkit-input-placeholder {
+        color: @c;
+        opacity: 0.25;
+    }
+}
+
+.BetterRadioButton(@bg, @corect, @border) {
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    transition: all 0.25s ease-out 0s;
+    width: 20px;
+    height: 20px;
+    background-color: @bg;
+    border-radius: 50%;
+    background-size: 100% 100%;
+
+    &:checked:before {
+        background-color: @corect;
+        text-align: center;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        top: 50%;
+        left: 50%;
+        border-radius: 20px;
+        border: 2px solid @corect;
+        margin-top: -8px;
+        margin-left: -8px;
+        animation: radioAnimation 0.5s ease-in-out 0s 1;
+    }
+
+    @keyframes radioAnimation {
+        0% {
+            filter: none;
+            border-color: transparent;
+            background-color: transparent;
+            border-top-color: @corect;
+            transform: rotate(0deg);
+        }
+
+        99% {
+            border-color: transparent;
+            border-top-color: @corect;
+            background-color: @border;
+            transform: rotate(360deg);
+        }
+
+        100% {
+            background-color: @corect;
+        }
+    }
+}
+
+.BetterCheckBox(@bg, @border) {
+    height: 25px;
+    width: 25px;
+    -webkit-appearance: none;
+    background: @bg;
+    border: 1px solid @border;
+    border-radius: 2px;
+    margin-right: 10px;
+
+    &:checked {
+        background: @bg;
+        background-image: url(../Img/check-mark.png);
+        background-size: 100%;
+        background-position: center center;
+        border: none;
+    }
+}
+
+.BetterInputButtons(@bg, @border, @color) {
+    width: 100px;
+    height: 30px;
+    text-transform: uppercase;
+    color: @color;
+    background: @bg;
+    font-weight: 900;
+    border: 2px solid @border;
+    border-radius: 10px;
+    transition: 0.5s all ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        letter-spacing: 2px;
+    }
+
+    &:focus {
+        letter-spacing: 2px;
+        background: @color;
+        color: @border;
+    }
+}

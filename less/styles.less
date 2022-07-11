@@ -1,0 +1,25 @@
+@primary: #3B2B4E;
+@secondary: #75485F;
+@third: #BF716D;
+@forth: #FF9F67;
+@fifth: #FFBD65;
+
+* {
+    margin: 0;
+}
+
+.wrapper {
+    background: @secondary;
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template: 1.2% 0.5fr 1fr 1.2% / 1.2% 0.6fr repeat(2, 1fr) 1.2%;
+    grid-template-areas: ". . . . ."
+        ". creation emdo emdo ."
+        ". additional emdo emdo ."
+        ". . . . .";
+}
+
+.miniblock {
+    padding: 20px;
+}

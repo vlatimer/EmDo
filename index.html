@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Do</title>
+    <link rel="stylesheet/less" type="text/css" href="./less/styles.less">
+    <link rel="stylesheet/less" type="text/css" href="./less/additional.less">
+    <link rel="stylesheet/less" type="text/css" href="./less/creation.less">
+    <link rel="stylesheet/less" type="text/css" href="./less/emdo.less">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="creation miniblock">
+            <h2 class="creation__header miniblock__header">Создание Сотрудников</h2>
+            <form class="creation__form">
+                <div class="creation__name-input-box">
+                    <div class="creation__input-box">
+                        <label class="creation__label" for="input-name">Имя:</label>
+                        <input class="creation__input" type="text" id="input-name">
+                    </div>
+                    <div class="creation__input-box">
+                        <label class="creation__label" for="input-surname">Фамилия:</label>
+                        <input class="creation__input" type="text" id="input-surname">
+                    </div>
+                    <div class="creation__input-box">
+                        <label class="creation__label" for="input-patronymic">Отчество:</label>
+                        <input class="creation__input" type="text" id="input-patronymic">
+                    </div>
+                    <div class="creation__input-box">
+                        <label class="creation__label" for="input-date">Дата:</label>
+                        <input class="creation__input" type="text" id="input-date" placeholder="00.00.0000">
+                    </div>
+                </div>
+                <div class="creation__radio-box">
+                    <div class="creation__radio-man">
+                        <input class="creation__radio" type="radio" id="man" name="sex">
+                        <label class="creation__label" for="man">Мужчина</label>
+                    </div>
+                    <div class="creation__radio-woman">
+                        <input class="creation__radio" type="radio" id="woman" name="sex">
+                        <label class="creation__label" for="woman">Женщина</label>
+                    </div>
+                </div>
+                <div class="creation__checkbox-box">
+                    <input class="creation__checkbox" type="checkbox" id="education">
+                    <label class="creation__label" for="education">Высшее образование</label>
+                </div>
+                <div class="creation__button-box">
+                    <input class="creation__button creation__button_r" type="reset" value="Заного">
+                    <input class="creation__button creation__button_s" type="submit" value="Готово">
+                </div>
+            </form>
+        </div>
+        <div class="emdo"></div>
+        <div class="additional"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
+</body>
+
+</html>
