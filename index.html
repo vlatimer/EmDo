@@ -10,6 +10,7 @@
     <link rel="stylesheet/less" type="text/css" href="./less/additional.less">
     <link rel="stylesheet/less" type="text/css" href="./less/creation.less">
     <link rel="stylesheet/less" type="text/css" href="./less/emdo.less">
+    <script src="https://kit.fontawesome.com/d9643f166e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -20,33 +21,34 @@
                 <div class="creation__name-input-box">
                     <div class="creation__input-box">
                         <label class="creation__label" for="input-name">Имя:</label>
-                        <input class="creation__input" type="text" id="input-name">
+                        <input class="creation__input" type="text" id="input-name" name="name">
                     </div>
                     <div class="creation__input-box">
                         <label class="creation__label" for="input-surname">Фамилия:</label>
-                        <input class="creation__input" type="text" id="input-surname">
+                        <input class="creation__input" type="text" id="input-surname" name="surname">
                     </div>
                     <div class="creation__input-box">
                         <label class="creation__label" for="input-patronymic">Отчество:</label>
-                        <input class="creation__input" type="text" id="input-patronymic">
+                        <input class="creation__input" type="text" id="input-patronymic" name="patronymic">
                     </div>
                     <div class="creation__input-box">
                         <label class="creation__label" for="input-date">Дата:</label>
-                        <input class="creation__input" type="text" id="input-date" placeholder="00.00.0000">
+                        <input class="creation__input" type="text" id="input-date" placeholder="00.00.0000" name="age"
+                            value="27.01.2006">
                     </div>
                 </div>
                 <div class="creation__radio-box">
                     <div class="creation__radio-man">
-                        <input class="creation__radio" type="radio" id="man" name="sex">
+                        <input class="creation__radio" type="radio" id="man" name="sex" value="man" checked>
                         <label class="creation__label" for="man">Мужчина</label>
                     </div>
                     <div class="creation__radio-woman">
-                        <input class="creation__radio" type="radio" id="woman" name="sex">
+                        <input class="creation__radio" type="radio" id="woman" name="sex" value="woman">
                         <label class="creation__label" for="woman">Женщина</label>
                     </div>
                 </div>
                 <div class="creation__checkbox-box">
-                    <input class="creation__checkbox" type="checkbox" id="education">
+                    <input class="creation__checkbox" type="checkbox" id="education" name="education" value="educated">
                     <label class="creation__label" for="education">Высшее образование</label>
                 </div>
                 <div class="creation__button-box">
@@ -55,11 +57,23 @@
                 </div>
             </form>
         </div>
-        <div class="emdo"></div>
+        <div class="emdo">
+            <h1 class="emdo__header">Сотрудники</h1>
+            <div class="emdo__list">
+
+            </div>
+        </div>
         <div class="additional"></div>
     </div>
-
+    <script src="./js/helpers.js"></script>
+    <script src="./js/Store.js"></script>
+    <script src="./js/Template.js"></script>
+    <script src="./js/View.js"></script>
+    <script src="./js/Model.js"></script>
+    <script src="./js/Controller.js"></script>
+    <script src="./js/App.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
+
 </body>
 
 </html>

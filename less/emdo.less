@@ -7,4 +7,136 @@
 .emdo {
     grid-area: emdo;
     background-color: @forth;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        align-self: center;
+        color: @primary;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        height: 5%;
+        margin-bottom: 10px;
+    }
+
+    &__list {
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        height: 95%;
+        padding: 5px;
+    }
+}
+
+.em {
+    &+& {
+        margin-top: 20px;
+    }
+
+    box-sizing: border-box;
+    display: grid;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    background-color: @primary;
+    padding: 10px;
+    grid-template: 1fr / repeat(5, 1fr);
+    color: @fifth;
+
+    & * {
+        margin: auto;
+    }
+
+    &__header-box {
+        width: 100%;
+        height: 100%;
+        justify-self: start;
+        align-self: start;
+
+        & .em__date {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__block {
+        display: flex;
+        padding: 10px;
+        color: @fifth;
+        width: fit-content;
+
+
+        i {
+            margin-right: 10px;
+        }
+
+        p {
+            white-space: nowrap;
+            font-size: 1.1rem;
+        }
+    }
+
+    &__time {
+        &-box {
+            div+div {
+                margin-top: 20px;
+            }
+        }
+
+        &-create {
+            i {
+                color: @fifth;
+            }
+        }
+
+        &-delete {
+            i {
+                color: red;
+            }
+        }
+    }
+
+    &__sex {
+
+        &-man {
+            i {
+                color: royalblue;
+            }
+        }
+
+        &-woman {
+            i {
+                color: #e75480;
+            }
+        }
+    }
+
+    &__education {
+        i {
+            color: #66ff00;
+        }
+    }
+
+    &__destroy {
+        border: none;
+        background-color: transparent;
+        width: 50px;
+        height: 50px;
+        justify-self: start;
+        align-self: start;
+        cursor: pointer;
+
+        i {
+            color: red;
+            opacity: 0.5;
+        }
+
+        &:hover {
+            i {
+                opacity: 1;
+            }
+        }
+    }
+
+
 }
