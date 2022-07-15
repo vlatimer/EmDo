@@ -14,7 +14,7 @@
         '<i class="fa-solid fa-clock-rotate-left fa-2x"></i>' +
         "<p>{{creationTime}}</p>" +
         "</div>" +
-        '<div class="{{visible?}} em__time-delete em__block">' +
+        '<div class="em__time-delete em__block">' +
         '<i class="fa-solid fa-clock-rotate-left fa-2x"></i>' +
         "<p>{{deleteTime}}</p>" +
         "</div>" +
@@ -27,7 +27,35 @@
         '<i class="fa-solid fa-building-columns fa-2x"></i>' +
         "<p>Высшее образование</p>" +
         "</div>" +
+        "</div>";
+      this.defaultTemplateWithOutDeleteTime =
+        '<div class="em" data-id={{id}}>' +
+        '<div class="em__header-box">' +
+        '<h2 class="em__header">{{surname}}</h2>' +
+        '<h2 class="em__header">{{name}}</h2>' +
+        '<h2 class="em__header">{{patronymic}}</h2>' +
+        '<p class="em__date">Возраст: {{age}} лет</p>' +
+        "</div>" +
+        '<div class="em__time-box">' +
+        '<div class="em__time-create em__block">' +
+        '<i class="fa-solid fa-clock-rotate-left fa-2x"></i>' +
+        "<p>{{creationTime}}</p>" +
+        "</div>" +
+        "</div>" +
+        '<div class="em__sex-{{sex}} em__block">' +
+        "{{iconSex}}" +
+        "<p>{{sexName}}</p>" +
+        "</div>" +
+        '<div class="{{educated?}} em__education em__block">' +
+        '<i class="fa-solid fa-building-columns fa-2x"></i>' +
+        "<p>Высшее образование</p>" +
+        "</div>" +
         '<button class="em__destroy"><i class="fa-solid fa-user-minus fa-2x"></i></button>' +
+        "</div>";
+      this.defaultTemplateDeleteTime =
+        '<div class="em__time-delete em__block">' +
+        '<i class="fa-solid fa-clock-rotate-left fa-2x"></i>' +
+        "<p>{{deleteTime}}</p>" +
         "</div>";
     }
     show = function (data) {
@@ -35,10 +63,13 @@
       var view = "";
 
       for (i = 0, l = data.length; i < l; i++) {
-        var template = this.defaultTemplate;
+        var template;
         // detected if item is deleted
         if (!data[i].deletionTime) {
-          template = template.replace("{{visible?}}", "unvisible");
+          template = this.defaultTemplateWithOutDeleteTime;
+        } else {
+          template = this.defaultTemplate;
+          template = template.replace("{{deleteTime}}", data[i].deletionTime);
         }
         // detected if item gender is man or woman
         if (data[i].sex === "man") {
@@ -73,6 +104,19 @@
       }
       return view;
     };
+
+    removeEmployee = function (elem, dt) {
+      var template = this.defaultTemplateDeleteTime;
+
+      template = template.replace("{{deleteTime}}", dt);
+
+      elem.innerHTML = elem.innerHTML + template;
+    };
+
+    hidedestroyButton(id) {
+      var lastchild = id.lastChild;
+      lastchild.style.display = "none";
+    }
   }
   window.app = window.app || {};
   window.app.Template = Template;

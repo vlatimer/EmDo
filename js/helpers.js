@@ -1,12 +1,11 @@
 (function (window) {
-  window.qs = function (style) {
-    return document.querySelector(style);
+  window.qs = function (style, scope) {
+    return (scope || document).querySelector(style);
   };
-  window.qsa = function (style) {
-    return document.querySelectorAll(style);
+  window.qsa = function (style, scope) {
+    return (scope || document).querySelectorAll(style);
   };
   window.$event = function (element, type, callback) {
-    console.log(element);
     element.addEventListener(type, callback);
     return;
   };
@@ -43,5 +42,27 @@
   };
   window.capitalLetter = function (str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+  // pin point event
+  window.$ppevent = function (target, selector, type, callback) {
+    function findElem(event) {
+      var targetElement = event.target.closest(selector);
+      var potentialElements = window.qsa(selector, target);
+      hasIn =
+        Array.prototype.indexOf.call(potentialElements, targetElement) >= 0;
+      if (hasIn) {
+        callback.call(targetElement, event);
+      }
+    }
+    window.$event(target, type, findElem);
+  };
+  window.parentFind = function (element, tagName) {
+    if (!element.parentNode) {
+      return;
+    }
+    if (element.parentNode.tagName.toLowerCase() === tagName.toLowerCase()) {
+      return element.parentNode;
+    }
+    return window.parentFind(element.parentNode, tagName);
   };
 })(window);

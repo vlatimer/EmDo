@@ -26,6 +26,10 @@
     read = function (callback) {
       this.storage.findAll(callback);
     };
+
+    remove = function (id, callback) {
+      this.storage.remove(id, callback);
+    };
   }
 
   window.app = window.app || {};

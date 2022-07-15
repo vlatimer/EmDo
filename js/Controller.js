@@ -1,16 +1,16 @@
 (function (window) {
   class Controller {
     constructor(view, model) {
-      this.view = view;
-      this.model = model;
       self = this;
-      this.view.bind("newEmployee", this.addEmployee);
+      self.view = view;
+      self.model = model;
+      self.view.bind("newEmployee", this.addEmployee);
+      self.view.bind("EmployeeRemove", this.removeEmployee);
     }
 
     addEmployee = function (event) {
       event.preventDefault();
       const data = gfd(event);
-      console.log(self);
       if (
         data["name"].trim() &&
         data["surname"].trim() &&
@@ -25,12 +25,21 @@
     };
 
     showEmployees = function () {
+      // var self = this;
       self.model.read(function (data) {
         self.view.render("showEmployees", data);
       });
     };
 
+    removeEmployee = function (id) {
+      // var self = this;
+      self.model.remove(id, function (data) {
+        self.view.render("removeEmployee", data);
+      });
+    };
+
     startView = function () {
+      // var self = this;
       self.showEmployees();
     };
   }
