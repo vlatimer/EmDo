@@ -63,7 +63,69 @@
 
             </div>
         </div>
-        <div class="additional"></div>
+        <div class="additional">
+            <form class="additional__form">
+                <div class="additional__filter-block">
+                    <h2 class=additional__filter-header>Фильтры</h2>
+                    <div class="additional__filter filter">
+                        <label for="sex-filter" class="filter__name">Пол:</label>
+                        <select id="sex-filter" class="filter__box">
+                            <option>Все</option>
+                            <option>Мужчина</option>
+                            <option>Женщина</option>
+                        </select>
+                    </div>
+                    <div class="additional__filter filter">
+                        <label for="age-filter" class="filter__name">Возраст:</label>
+                        <select id="age-filter" class="filter__box">
+                            <option>Все</option>
+                            <option>до 25</option>
+                            <option>от 25 до 45</option>
+                            <option>от 45</option>
+                        </select>
+                    </div>
+                    <div class="additional__filter filter">
+                        <label for="education-filter" class="filter__name">Образование</label>
+                        <select id="education-filter" class="filter__box">
+                            <option>Все</option>
+                            <option>С высшим</option>
+                            <option>Без высшего</option>
+                        </select>
+                    </div>
+                    <div class="additional__filter filter">
+                        <label for="status-filter" class="filter__name">Состояние:</label>
+                        <select id="status-filter" class="filter__box">
+                            <option>Все</option>
+                            <option>Работающие</option>
+                            <option>Уволенные</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="additional__sort-block">
+                    <h2 class="additional__sort-header">Сортировка</h2>
+                    <div class="additional__radio-box">
+                        <div class="additional__radio-wrapper">
+                            <input class="additional__radio" type="radio" id="alfabet" name="sort">
+                            <label class="additional__label" for="alfabet">По Алфавиту</label>
+                        </div>
+                        <div class="additional__radio-wrapper">
+                            <input class="additional__radio" type="radio" id="creation" name="sort">
+                            <label class="additional__label" for="creation">По Дате Приема</label>
+                        </div>
+                        <div class="additional__radio-wrapper">
+                            <input class="additional__radio" type="radio" id="deletion" name="sort">
+                            <label class="additional__label" for="deletion">По Дате Увольнения</label>
+                        </div>
+                        <div class="additional__radio-wrapper">
+                            <input class="additional__radio" type="radio" id="without" name="sort" checked>
+                            <label class="additional__label" for="without">Без Сортировки</label>
+                        </div>
+                    </div>
+                </div>
+                <input class="additional__reset" type="reset" value="заного">
+                <input class="additional__submit" type="submit" value="готово">
+            </form>
+        </div>
     </div>
     <script src="./js/helpers.js"></script>
     <script src="./js/Store.js"></script>

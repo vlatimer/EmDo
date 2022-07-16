@@ -5,23 +5,6 @@
       this.$createForm = qs(".creation__form");
       this.$emdoList = qs(".emdo__list");
     }
-    itemId = function (element) {
-      var div = parentFind(element, "div");
-      return parseInt(div.dataset.id, 10);
-    };
-
-    bind = function (command, callback) {
-      var self = this;
-      switch (command) {
-        case "newEmployee":
-          $event(this.$createForm, "submit", callback);
-          break;
-        case "EmployeeRemove":
-          $ppevent(self.$emdoList, ".em__destroy", "click", function () {
-            callback(self.itemId(this));
-          });
-      }
-    };
 
     _removeEmployee = function (id, dt) {
       var elem = qs('[data-id="' + id + '"]');
@@ -47,6 +30,23 @@
       }
     }
   }
+  itemId = function (element) {
+    var div = parentFind(element, "div");
+    return parseInt(div.dataset.id, 10);
+  };
+
+  bind = function (command, callback) {
+    var self = this;
+    switch (command) {
+      case "newEmployee":
+        $event(this.$createForm, "submit", callback);
+        break;
+      case "EmployeeRemove":
+        $ppevent(self.$emdoList, ".em__destroy", "click", function () {
+          callback(self.itemId(this));
+        });
+    }
+  };
   window.app = window.app || {};
   window.app.View = View;
 })(window);

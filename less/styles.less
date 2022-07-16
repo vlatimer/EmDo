@@ -1,3 +1,4 @@
+@import "mixins";
 @primary: #3B2B4E;
 @secondary: #75485F;
 @third: #BF716D;
@@ -13,16 +14,17 @@
     height: 100vh;
     width: 100%;
     display: grid;
-    grid-template: 1.2% 0.5fr 1fr 1.2% / 1.2% 0.6fr repeat(2, 1fr) 1.2%;
+    grid-template: 1.2% 0.5fr 0.5fr 1fr 1.2% / 1.2% 0.6fr repeat(2, 1fr) 1.2%;
     grid-template-areas: ". . . . ."
         ". creation emdo emdo ."
         ". additional emdo emdo ."
-        ". . . . .";
+        ". . emdo emdo .";
 }
 
 .miniblock {
     padding: 20px;
 }
+
 
 .unvisible {
     visibility: hidden;

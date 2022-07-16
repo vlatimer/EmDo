@@ -1,3 +1,4 @@
+@import "mixins";
 @primary: #3B2B4E;
 @secondary: #75485F;
 @third: #BF716D;
@@ -7,4 +8,101 @@
 .additional {
     grid-area: additional;
     background-color: @third;
+
+    * {
+        color: @primary;
+    }
+
+    &__form {
+        position: relative;
+        height: fit-content;
+        display: grid;
+        grid-template: 1fr 0.2fr / repeat(2, 2fr);
+        grid-template-areas: "filter sort"
+            "reset submit";
+    }
+
+    &__filter-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        grid-area: filter;
+    }
+
+    &__sort-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5px;
+        grid-area: sort;
+    }
+
+    &__radio-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        grid-area: radio;
+        height: 100%;
+    }
+
+    &__radio-wrapper {
+        &+& {
+            margin-top: 10px;
+        }
+
+        align-self: flex-start;
+    }
+
+    &__radio {
+        .BetterRadioButton(@primary, @fifth, @third);
+    }
+
+    &__reset {
+        .BetterInputButtons(@primary, @third, @forth);
+        margin: auto;
+    }
+
+    &__submit {
+        .BetterInputButtons(@primary, @third, @forth);
+        margin: auto;
+    }
+
+}
+
+.filter {
+    align-self: flex-end;
+
+    &+& {
+        margin-top: 10px;
+    }
+
+    &__box {
+        cursor: pointer;
+        transition: 0.5s;
+        box-sizing: content-box;
+        outline: none;
+        background: @primary;
+        color: @fifth;
+        border: none;
+        width: 100px;
+        height: 40px;
+        border-radius: 5px;
+        margin-left: 10px;
+
+        &:hover {
+            color: @forth;
+        }
+
+        & option {
+            color: @forth;
+            font-style: italic;
+        }
+    }
+
+    &__name {
+        font-size: 1.1rem;
+    }
 }
