@@ -30,6 +30,9 @@
     remove = function (id, callback) {
       this.storage.remove(id, callback);
     };
+    getLength = function (callback) {
+      this.storage.getLength(callback);
+    };
   }
 
   window.app = window.app || {};

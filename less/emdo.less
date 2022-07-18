@@ -9,15 +9,36 @@
     background-color: @forth;
     display: flex;
     flex-direction: column;
+    border-bottom-left-radius: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    &__header {
+    &__header-box {
+        display: grid;
         align-self: center;
         color: @primary;
         font-weight: 700;
         letter-spacing: 1.2px;
         height: 5%;
         margin-bottom: 10px;
+        width: 100%;
+        grid-template: 1fr / repeat(3, 1fr);
+
+        * {
+            margin: auto;
+        }
     }
+
+    &__header {
+        grid-column: 2;
+        align-self: center;
+        justify-self: center;
+    }
+
+    &__counter {
+        grid-column: 3;
+    }
+
 
     &__list {
         position: relative;
@@ -25,6 +46,20 @@
         width: 100%;
         height: 95%;
         padding: 5px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+
+        border-radius: 10px;
+        background-color: @third;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
     }
 }
 

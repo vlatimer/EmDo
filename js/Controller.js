@@ -22,6 +22,7 @@
           self.showEmployees();
         });
       }
+      self.updateEployeeCounter();
     };
 
     showEmployees = function () {
@@ -29,6 +30,7 @@
       self.model.read(function (data) {
         self.view.render("showEmployees", data);
       });
+      self.updateEployeeCounter();
     };
 
     removeEmployee = function (id) {
@@ -36,11 +38,19 @@
       self.model.remove(id, function (data) {
         self.view.render("removeEmployee", data);
       });
+      self.updateEployeeCounter();
     };
 
     startView = function () {
       // var self = this;
       self.showEmployees();
+      self.updateEployeeCounter();
+    };
+
+    updateEployeeCounter = function () {
+      self.model.getLength(function (data) {
+        self.view.render("employeeCounter", data);
+      });
     };
   }
   window.app = window.app || {};

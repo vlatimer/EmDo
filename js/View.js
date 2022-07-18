@@ -4,6 +4,7 @@
       this.template = template;
       this.$createForm = qs(".creation__form");
       this.$emdoList = qs(".emdo__list");
+      this.$employeeCounter = qs(".emdo__counter");
     }
 
     _removeEmployee = function (id, dt) {
@@ -27,26 +28,29 @@
         case "removeEmployee":
           self._removeEmployee(parameter.id, parameter.deleteTime);
           break;
+        case "employeeCounter":
+          self.$employeeCounter.innerHTML =
+            self.template.employeeCounter(parameter);
       }
     }
-  }
-  itemId = function (element) {
-    var div = parentFind(element, "div");
-    return parseInt(div.dataset.id, 10);
-  };
+    itemId = function (element) {
+      var div = parentFind(element, "div");
+      return parseInt(div.dataset.id, 10);
+    };
 
-  bind = function (command, callback) {
-    var self = this;
-    switch (command) {
-      case "newEmployee":
-        $event(this.$createForm, "submit", callback);
-        break;
-      case "EmployeeRemove":
-        $ppevent(self.$emdoList, ".em__destroy", "click", function () {
-          callback(self.itemId(this));
-        });
-    }
-  };
+    bind = function (command, callback) {
+      var self = this;
+      switch (command) {
+        case "newEmployee":
+          $event(self.$createForm, "submit", callback);
+          break;
+        case "EmployeeRemove":
+          $ppevent(self.$emdoList, ".em__destroy", "click", function () {
+            callback(self.itemId(this));
+          });
+      }
+    };
+  }
   window.app = window.app || {};
   window.app.View = View;
 })(window);

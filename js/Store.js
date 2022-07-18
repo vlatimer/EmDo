@@ -54,6 +54,11 @@
       localStorage.setItem(this.dbName, JSON.stringify(emdos));
       callback({ id: id, deleteTime: deleteTime });
     };
+
+    getLength = function (callback) {
+      var length = JSON.parse(localStorage.getItem(this.dbName)).length;
+      callback(length);
+    };
   }
   window.app = window.app || {};
   window.app.Store = Store;

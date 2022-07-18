@@ -117,6 +117,21 @@
       var lastchild = id.lastChild;
       lastchild.style.display = "none";
     }
+
+    employeeCounter = function (count) {
+      var plural;
+      if (count >= 2 && count <= 4) {
+        plural = "а";
+      } else if (count >= 5 && count <= 20) {
+        plural = "ов";
+      } else {
+        plural = "";
+      }
+      if (count !== 0) {
+        return count + " Сотрудник" + plural;
+      }
+      return "";
+    };
   }
   window.app = window.app || {};
   window.app.Template = Template;
