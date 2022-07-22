@@ -7,11 +7,11 @@
 
 .additional {
     grid-area: additional;
-    background-color: @third;
+    background-color: @secondary;
     border-bottom-left-radius: 40px;
 
     * {
-        color: @primary;
+        color: @fifth;
     }
 
     &__form {
@@ -30,6 +30,11 @@
         justify-content: space-between;
         padding: 5px;
         grid-area: filter;
+        margin-bottom: 10px;
+    }
+
+    &__filter-header {
+        margin-bottom: 10px;
     }
 
     &__sort-block {

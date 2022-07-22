@@ -57,6 +57,7 @@
         '<i class="fa-solid fa-clock-rotate-left fa-2x"></i>' +
         "<p>{{deleteTime}}</p>" +
         "</div>";
+      this.withoutEnding = [11, 12, 13, 14, 111, 1111];
     }
     show = function (data) {
       var i, l;
@@ -120,12 +121,18 @@
 
     employeeCounter = function (count) {
       var plural;
-      if (count >= 2 && count <= 4) {
-        plural = "а";
-      } else if (count >= 5 && count <= 20) {
-        plural = "ов";
-      } else {
+      if (count === 1) {
         plural = "";
+      } else if (this.withoutEnding.indexOf(count) >= 0) {
+        plural = "ов";
+      } else if (
+        ["2", "3", "4"].indexOf(
+          count.toString()[count.toString().length - 1]
+        ) >= 0
+      ) {
+        plural = "а";
+      } else {
+        plural = "ов";
       }
       if (count !== 0) {
         return count + " Сотрудник" + plural;

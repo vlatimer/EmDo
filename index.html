@@ -72,35 +72,35 @@
                     <h2 class=additional__filter-header>Фильтры</h2>
                     <div class="additional__filter filter">
                         <label for="sex-filter" class="filter__name">Пол:</label>
-                        <select id="sex-filter" class="filter__box">
-                            <option>Все</option>
-                            <option>Мужчина</option>
-                            <option>Женщина</option>
+                        <select id="sex-filter" class="filter__box" name="sex">
+                            <option value="all">Все</option>
+                            <option value="man">Мужчина</option>
+                            <option value="woman">Женщина</option>
                         </select>
                     </div>
                     <div class="additional__filter filter">
                         <label for="age-filter" class="filter__name">Возраст:</label>
-                        <select id="age-filter" class="filter__box">
-                            <option>Все</option>
-                            <option>до 25</option>
-                            <option>от 25 до 45</option>
-                            <option>от 45</option>
+                        <select id="age-filter" class="filter__box" name="age">
+                            <option value="all">Все</option>
+                            <option value="teen">до 25</option>
+                            <option value="adult">от 25 до 45</option>
+                            <option value="old">от 45</option>
                         </select>
                     </div>
                     <div class="additional__filter filter">
                         <label for="education-filter" class="filter__name">Образование</label>
-                        <select id="education-filter" class="filter__box">
-                            <option>Все</option>
-                            <option>С высшим</option>
-                            <option>Без высшего</option>
+                        <select id="education-filter" class="filter__box" name="education">
+                            <option value="all">Все</option>
+                            <option value="yes">С высшим</option>
+                            <option value="no">Без высшего</option>
                         </select>
                     </div>
                     <div class="additional__filter filter">
                         <label for="status-filter" class="filter__name">Состояние:</label>
-                        <select id="status-filter" class="filter__box">
-                            <option>Все</option>
-                            <option>Работающие</option>
-                            <option>Уволенные</option>
+                        <select id="status-filter" class="filter__box" name="status">
+                            <option value="all">Все</option>
+                            <option value="work">Работающие</option>
+                            <option value="del">Уволенные</option>
                         </select>
                     </div>
                 </div>
@@ -108,19 +108,19 @@
                     <h2 class="additional__sort-header">Сортировка</h2>
                     <div class="additional__radio-box">
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="alfabet" name="sort">
+                            <input class="additional__radio" type="radio" id="alfabet" name="sort" value="alf">
                             <label class="additional__label" for="alfabet">По Алфавиту</label>
                         </div>
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="creation" name="sort">
+                            <input class="additional__radio" type="radio" id="creation" name="sort" value="dc">
                             <label class="additional__label" for="creation">По Дате Приема</label>
                         </div>
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="deletion" name="sort">
+                            <input class="additional__radio" type="radio" id="deletion" name="sort" value="dd">
                             <label class="additional__label" for="deletion">По Дате Увольнения</label>
                         </div>
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="without" name="sort" checked>
+                            <input class="additional__radio" type="radio" id="without" name="sort" value="wo" checked>
                             <label class="additional__label" for="without">Без Сортировки</label>
                         </div>
                     </div>

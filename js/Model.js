@@ -17,6 +17,7 @@
         creationTime: fd(tmp_date),
         sex: data["sex"],
         education: data["education"] || "",
+        deletionDate: null,
         deletionTime: null,
       };
 
@@ -30,8 +31,19 @@
     remove = function (id, callback) {
       this.storage.remove(id, callback);
     };
-    getLength = function (callback) {
-      this.storage.getLength(callback);
+    getLength = function (data, callback) {
+      var dataType = typeof data;
+      callback = callback || function () {};
+
+      if (dataType === "function") {
+        callback = data;
+        this.storage.getLength(callback);
+      } else {
+        return callback(data.length);
+      }
+    };
+    filter = function (data, callback) {
+      this.storage.findWithFilters(data, callback);
     };
   }
 

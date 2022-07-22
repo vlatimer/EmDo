@@ -46,6 +46,7 @@
   // pin point event
   window.$ppevent = function (target, selector, type, callback) {
     function findElem(event) {
+      console.log(event.target);
       var targetElement = event.target.closest(selector);
       var potentialElements = window.qsa(selector, target);
       hasIn =

@@ -5,12 +5,14 @@
       self.view = view;
       self.model = model;
       self.view.bind("newEmployee", this.addEmployee);
+      self.view.bind("newFilters", this.addFilters);
       self.view.bind("EmployeeRemove", this.removeEmployee);
     }
 
     addEmployee = function (event) {
       event.preventDefault();
       const data = gfd(event);
+
       if (
         data["name"].trim() &&
         data["surname"].trim() &&
@@ -22,13 +24,14 @@
           self.showEmployees();
         });
       }
+
       self.updateEployeeCounter();
     };
 
     showEmployees = function () {
       // var self = this;
       self.model.read(function (data) {
-        self.view.render("showEmployees", data);
+        self.view.render("showEmployees", { arr: data });
       });
       self.updateEployeeCounter();
     };
@@ -38,19 +41,33 @@
       self.model.remove(id, function (data) {
         self.view.render("removeEmployee", data);
       });
-      self.updateEployeeCounter();
     };
+    addFilters = function (event) {
+      event.preventDefault();
+      const { sort, ...filters } = gfd(event);
+      console.log(sort, filters);
 
+      self.model.filter(filters, function (data) {
+        console.log(data);
+        self.updateEployeeCounter(data);
+        self.view.render("showEmployees", { sort: sort, arr: data });
+      });
+    };
     startView = function () {
       // var self = this;
       self.showEmployees();
-      self.updateEployeeCounter();
     };
 
-    updateEployeeCounter = function () {
-      self.model.getLength(function (data) {
-        self.view.render("employeeCounter", data);
-      });
+    updateEployeeCounter = function (data) {
+      var callback = function (dt) {
+        self.view.render("employeeCounter", dt);
+      };
+      console.log("data = ", data);
+      if (!data) {
+        self.model.getLength(callback);
+      } else {
+        self.model.getLength(data, callback);
+      }
     };
   }
   window.app = window.app || {};
