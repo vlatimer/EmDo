@@ -4,11 +4,23 @@
 @third: #BF716D;
 @forth: #FF9F67;
 @fifth: #FFBD65;
+@breakpoint-lg: ~"(max-width:992px)";
+@breakpoint-md: ~"(max-width:768px)";
 
 .additional {
     grid-area: additional;
     background-color: @secondary;
     border-bottom-left-radius: 40px;
+
+    @media @breakpoint-lg {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 40px;
+    }
+
+    @media @breakpoint-md {
+        border-radius: 0;
+    }
+
 
     * {
         color: @fifth;
@@ -21,6 +33,14 @@
         grid-template: 1fr 0.2fr / repeat(2, 2fr);
         grid-template-areas: "filter sort"
             "reset submit";
+
+        @media @breakpoint-lg {
+            height: 100%;
+        }
+
+        @media @breakpoint-md {
+            padding-top: 10px;
+        }
     }
 
     &__filter-block {

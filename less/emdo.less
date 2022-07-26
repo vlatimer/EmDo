@@ -3,6 +3,9 @@
 @third: #BF716D;
 @forth: #FF9F67;
 @fifth: #FFBD65;
+@breakpoint-xl: ~"(max-width: 1200px)";
+@breakpoint-lg: ~"(max-width:992px)";
+@breakpoint-md: ~"(max-width:768px)";
 
 .emdo {
     grid-area: emdo;
@@ -12,6 +15,7 @@
     border-bottom-left-radius: 40px;
     overflow-y: auto;
     overflow-x: hidden;
+
 
     &__header-box {
         display: grid;
@@ -50,12 +54,20 @@
 
     &::-webkit-scrollbar {
         width: 10px;
+
+        @media @breakpoint-md {
+            width: 3px;
+        }
     }
 
     &::-webkit-scrollbar-thumb {
 
         border-radius: 10px;
         background-color: @third;
+
+        @media @breakpoint-md {
+            background-color: @primary;
+        }
     }
 
     &::-webkit-scrollbar-track {
@@ -78,6 +90,28 @@
     padding: 10px;
     grid-template: 1fr / repeat(5, 1fr);
     color: @fifth;
+    grid-template-areas:"header time sex education destroy";
+
+    @media @breakpoint-xl {
+        grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+        height: 300px;
+        grid-template-areas: "header sex destroy"
+            "time education destroy";
+    }
+
+
+    @media @breakpoint-lg {
+        grid-template: 1fr / repeat(5, 1fr);
+        grid-template-areas: "header time sex education destroy";
+        height: 150px;
+    }
+
+    @media @breakpoint-md {
+        grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+        height: 250px;
+        grid-template-areas: "header sex destroy"
+            "time education destroy";
+    }
 
     & * {
         margin: auto;
@@ -88,6 +122,7 @@
         height: 100%;
         justify-self: start;
         align-self: start;
+        grid-area: header;
 
         & .em__date {
             font-size: 1.2rem;
@@ -113,6 +148,8 @@
 
     &__time {
         &-box {
+            grid-area: time;
+
             div+div {
                 margin-top: 20px;
             }
@@ -134,12 +171,16 @@
     &__sex {
 
         &-man {
+            grid-area: sex;
+
             i {
                 color: royalblue;
             }
         }
 
         &-woman {
+            grid-area: sex;
+
             i {
                 color: #e75480;
             }
@@ -147,12 +188,15 @@
     }
 
     &__education {
+        grid-area: education;
+
         i {
             color: #66ff00;
         }
     }
 
     &__destroy {
+        grid-area: destroy;
         border: none;
         background-color: transparent;
         width: 50px;

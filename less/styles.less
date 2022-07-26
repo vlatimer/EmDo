@@ -4,12 +4,33 @@
 @third: #BF716D;
 @forth: #FF9F67;
 @fifth: #FFBD65;
+@breakpoint-lg: ~"(max-width:992px)";
+@breakpoint-md: ~"(max-width:768px)";
 
 * {
     margin: 0;
 }
 
+body {
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+
+        border-radius: 5px;
+        background-color: @primary;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: @third;
+    }
+
+    overflow-x: hidden;
+}
+
 .wrapper {
+
     background: @third;
     height: 100vh;
     width: 100%;
@@ -19,6 +40,26 @@
         ". creation emdo emdo ."
         ". additional emdo emdo ."
         ". . emdo emdo .";
+    transition: all 0.5s;
+
+    @media @breakpoint-lg {
+        grid-template: 1.2% 0.5fr 1fr 1fr 1.2% / 1.2% repeat(2, 1fr) 1.2%;
+        grid-template-areas: ". . . ."
+            ". creation additional . "
+            ". emdo emdo ."
+            ". emdo emdo ."
+            ". . . .";
+    }
+
+    @media @breakpoint-md {
+        height: 200vh;
+        grid-template: 1.2% 0.2fr 0.3fr 0.5fr 1.2% / 1.2% 1fr 1.2%;
+        grid-template-areas: ". . ."
+            ". creation . "
+            ". additional ."
+            ". emdo ."
+            ". . .";
+    }
 }
 
 .miniblock {
