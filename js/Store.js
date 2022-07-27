@@ -34,7 +34,7 @@
         localStorage.setItem(this.dbName, JSON.stringify(emdos));
         callback.call(this, emdos);
       } else {
-        updateData.id = new Date().getTime();
+        updateData.id = new Date().getTime() - grn(1, 10000);
         emdos.push(updateData);
         localStorage.setItem(this.dbName, JSON.stringify(emdos));
         callback.call(this, [updateData]);
@@ -118,7 +118,6 @@
         }
         return false;
       };
-      console.log(typeof emdos);
       var emdosFilter = emdos.filter((item) => {
         if (
           _status(item.deletionTime, filters.status) &&

@@ -46,7 +46,6 @@
   // pin point event
   window.$ppevent = function (target, selector, type, callback) {
     function findElem(event) {
-      console.log(event.target);
       var targetElement = event.target.closest(selector);
       var potentialElements = window.qsa(selector, target);
       hasIn =
@@ -65,5 +64,9 @@
       return element.parentNode;
     }
     return window.parentFind(element.parentNode, tagName);
+  };
+
+  window.grn = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 })(window);

@@ -9,22 +9,28 @@
       self.view.bind("EmployeeRemove", this.removeEmployee);
     }
 
-    addEmployee = function (event) {
-      event.preventDefault();
-      const data = gfd(event);
-
-      if (
-        data["name"].trim() &&
-        data["surname"].trim() &&
-        data["patronymic"].trim() &&
-        data["age"].trim()
-      ) {
-        self.model.create(data, function () {
+    addEmployee = function (event, test) {
+      if (!test) {
+        event.preventDefault();
+        const data = gfd(event);
+        console.log(data);
+        if (
+          data["name"].trim() &&
+          data["surname"].trim() &&
+          data["patronymic"].trim() &&
+          data["age"].trim()
+        ) {
+          self.model.create(data, function () {
+            self.view.render("clearForm");
+            self.showEmployees();
+          });
+        }
+      } else {
+        self.model.create(test, function () {
           self.view.render("clearForm");
           self.showEmployees();
         });
       }
-
       self.updateEployeeCounter();
     };
 
@@ -45,10 +51,8 @@
     addFilters = function (event) {
       event.preventDefault();
       const { sort, ...filters } = gfd(event);
-      console.log(sort, filters);
 
       self.model.filter(filters, function (data) {
-        console.log(data);
         self.updateEployeeCounter(data);
         self.view.render("showEmployees", { sort: sort, arr: data });
       });
@@ -62,7 +66,6 @@
       var callback = function (dt) {
         self.view.render("employeeCounter", dt);
       };
-      console.log("data = ", data);
       if (!data) {
         self.model.getLength(callback);
       } else {

@@ -21,8 +21,8 @@
       switch (sortName) {
         case "alf":
           return arr.sort((first, second) => {
-            var firstName = first.surname;
-            var secondName = second.surname;
+            var firstName = first.surname + first.name + first.patronymic;
+            var secondName = second.surname + second.name + second.patronymic;
             if (firstName > secondName) {
               return 1;
             } else if (firstName < secondName) {
@@ -67,7 +67,6 @@
       switch (command) {
         case "showEmployees":
           parameter.arr = self._sortData(parameter.sort || "wo", parameter.arr);
-          console.log(parameter.arr);
           self.$emdoList.innerHTML = self.template.show(parameter.arr);
         case "clearForm":
           self.$createForm.reset();
