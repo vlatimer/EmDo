@@ -15,17 +15,31 @@
         patronymic: capitalLetter(data["patronymic"]),
         age: ga(data["age"]),
         creationTime: fd(tmp_date),
-        sex: data["sex"],
-        education: data["education"] || "",
-        deletionDate: null,
         deletionTime: null,
+        education: data["education"] || "",
+        sex: data["sex"],
+        ageText: atc(ga(data["age"])),
+        status: "work",
       };
 
       this.storage.save(newEmployee, callback);
     };
 
-    read = function (callback) {
-      this.storage.findAll(callback);
+    read = function (data, callback) {
+      var dataType = typeof data;
+      callback = callback || function () {};
+      if (dataType === "function") {
+        callback = data;
+        this.storage.findAll(callback);
+      } else {
+        const filtersObj = {};
+        for (let filter in data) {
+          if (data[filter] !== "all") {
+            filtersObj[filter] = data[filter];
+          }
+        }
+        this.storage.find(filtersObj, callback);
+      }
     };
 
     remove = function (id, callback) {
@@ -41,9 +55,6 @@
       } else {
         return callback(data.length);
       }
-    };
-    filter = function (data, callback) {
-      this.storage.findWithFilters(data, callback);
     };
   }
 

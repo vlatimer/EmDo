@@ -51,8 +51,7 @@
     addFilters = function (event) {
       event.preventDefault();
       const { sort, ...filters } = gfd(event);
-
-      self.model.filter(filters, function (data) {
+      self.model.read(filters, function (data) {
         self.updateEployeeCounter(data);
         self.view.render("showEmployees", { sort: sort, arr: data });
       });

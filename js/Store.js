@@ -12,6 +12,29 @@
 
       callback.call(this, JSON.parse(localStorage.getItem(name)));
     }
+
+    find = function (query, callback) {
+      if (!callback) {
+        return;
+      }
+
+      var emdos = JSON.parse(localStorage.getItem(this.dbName));
+      console.log(query);
+      callback(
+        emdos.filter(function (em) {
+          for (var q in query) {
+            console.log(q);
+            console.log(query[q]);
+            console.log(em[q]);
+            if (query[q] !== em[q]) {
+              return false;
+            }
+          }
+          return true;
+        })
+      );
+    };
+
     findAll = function (callback) {
       var emdos = JSON.parse(localStorage.getItem(this.dbName));
       callback(emdos);
@@ -48,7 +71,7 @@
       for (let i = 0; i < emdos.length; i++) {
         if (emdos[i].id === id) {
           emdos[i].deletionTime = deletionTime;
-          emdos[i].deletionDate = deletionDate;
+          emdos[i].status = "del";
           break;
         }
       }
@@ -59,79 +82,6 @@
     getLength = function (callback) {
       var length = JSON.parse(localStorage.getItem(this.dbName)).length;
       callback(length);
-    };
-
-    findWithFilters = function (filters, callback) {
-      var emdos = JSON.parse(localStorage.getItem(this.dbName));
-      // check status
-      var _status = function (status, filter) {
-        if (filter === "all") {
-          return true;
-        }
-        if (filter === "work" && !status) {
-          return true;
-        }
-        if (filter === "del" && status) {
-          return true;
-        }
-        return false;
-      };
-      // check age
-      var _age = function (age, filter) {
-        if (filter === "all") {
-          return true;
-        }
-        if (filter === "teen" && age < 25) {
-          return true;
-        }
-        if (filter === "adult" && 25 <= age && age < 45) {
-          return true;
-        }
-        if (filter === "old" && 45 <= age) {
-          return true;
-        }
-        return false;
-      };
-      // check education
-      var _education = function (education, filter) {
-        if (filter === "all") {
-          return true;
-        }
-        if (filter === "yes" && education) {
-          return true;
-        }
-        if (filter === "no" && !education) {
-          return true;
-        }
-        return false;
-      };
-      // check sex
-      var _sex = function (sex, filter) {
-        if (filter === "all") {
-          return true;
-        }
-        if (filter === "man" && sex === "man") {
-          return true;
-        }
-        if (filter === "woman" && sex === "woman") {
-          return true;
-        }
-        return false;
-      };
-      var emdosFilter = emdos.filter((item) => {
-        if (
-          _status(item.deletionTime, filters.status) &&
-          _age(item.age, filters.age) &&
-          _education(item.education, filters.education) &&
-          _sex(item.sex, filters.sex)
-        ) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-
-      callback(emdosFilter);
     };
   }
   window.app = window.app || {};

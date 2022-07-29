@@ -69,4 +69,16 @@
   window.grn = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
+  // ageTextConvertor;
+  window.atc = function (age) {
+    if (age < 25) {
+      return "teen";
+    }
+    if (25 <= age && age < 45) {
+      return "adult";
+    }
+    if (45 <= age) {
+      return "old";
+    }
+  };
 })(window);
