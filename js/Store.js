@@ -23,9 +23,6 @@
       callback(
         emdos.filter(function (em) {
           for (var q in query) {
-            console.log(q);
-            console.log(query[q]);
-            console.log(em[q]);
             if (query[q] !== em[q]) {
               return false;
             }
@@ -71,6 +68,7 @@
       for (let i = 0; i < emdos.length; i++) {
         if (emdos[i].id === id) {
           emdos[i].deletionTime = deletionTime;
+          emdos[i].deletionDate = deletionDate;
           emdos[i].status = "del";
           break;
         }

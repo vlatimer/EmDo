@@ -16,6 +16,7 @@
         age: ga(data["age"]),
         creationTime: fd(tmp_date),
         deletionTime: null,
+        deletionDate: null,
         education: data["education"] || "",
         sex: data["sex"],
         ageText: atc(ga(data["age"])),
