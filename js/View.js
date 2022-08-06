@@ -8,15 +8,17 @@
       this.$filterForm = qs(".additional__form");
     }
 
-    _removeEmployee = function (id, dt) {
+    _fireEmployee = function (id, dt) {
       var elem = qs('[data-id="' + id + '"]');
       var timediv = qs(".em__time-box", elem);
 
       if (timediv) {
-        this.template.removeEmployee(timediv, dt);
-        this.template.hidedestroyButton(elem);
+        timediv.innerHTML = timediv.innerHTML + this.template.fireEmployee(dt);
+        let lastchild = elem.lastChild;
+        lastchild.style.display = "none";
       }
     };
+
     _sortData = function (sortName, arr) {
       switch (sortName) {
         case "alf":
@@ -71,15 +73,16 @@
         case "clearForm":
           self.$createForm.reset();
           break;
-        case "removeEmployee":
-          self._removeEmployee(parameter.id, parameter.deleteTime);
+        case "fireEmployee":
+          self._fireEmployee(parameter.id, parameter.deletionTime);
           break;
         case "employeeCounter":
           self.$employeeCounter.innerHTML =
             self.template.employeeCounter(parameter);
       }
     }
-    itemId = function (element) {
+
+    _itemId = function (element) {
       var div = parentFind(element, "div");
       return parseInt(div.dataset.id, 10);
     };
@@ -90,12 +93,12 @@
         case "newEmployee":
           $event(self.$createForm, "submit", callback);
           break;
-        case "newFilters":
+        case "applyFilters":
           $event(self.$filterForm, "submit", callback);
           break;
-        case "EmployeeRemove":
+        case "EmployeeFire":
           $ppevent(self.$emdoList, ".em__destroy", "click", function () {
-            callback(self.itemId(this));
+            callback(self._itemId(this));
           });
       }
     };

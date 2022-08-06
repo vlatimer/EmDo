@@ -1,68 +1,75 @@
 (function (window) {
   class Controller {
     constructor(view, model) {
-      self = this;
+      var self = this;
+
       self.view = view;
       self.model = model;
-      self.view.bind("newEmployee", this.addEmployee);
-      self.view.bind("newFilters", this.addFilters);
-      self.view.bind("EmployeeRemove", this.removeEmployee);
+
+      self.view.bind("newEmployee", this.addEmployee.bind(this));
+      self.view.bind("applyFilters", this.applyFilters.bind(this));
+      self.view.bind("EmployeeFire", this.fireEmployee.bind(this));
     }
 
-    addEmployee = function (event, test) {
-      if (!test) {
-        event.preventDefault();
-        const data = gfd(event);
-        console.log(data);
-        if (
-          data["name"].trim() &&
-          data["surname"].trim() &&
-          data["patronymic"].trim() &&
-          data["age"].trim()
-        ) {
-          self.model.create(data, function () {
-            self.view.render("clearForm");
-            self.showEmployees();
-          });
-        }
-      } else {
-        self.model.create(test, function () {
+    addTestEmployee(data) {
+      var self = this;
+      self.model.create(data, () => {
+        self.view.render("clearForm");
+        self.showEmployees();
+      });
+      self.updateEployeeCounter();
+    }
+
+    addEmployee(event) {
+      var self = this;
+      event.preventDefault();
+      const data = getFormData(event);
+
+      if (self.model.isValid(data)) {
+        self.model.create(data, () => {
           self.view.render("clearForm");
           self.showEmployees();
         });
       }
-      self.updateEployeeCounter();
-    };
 
-    showEmployees = function () {
-      // var self = this;
-      self.model.read(function (data) {
+      self.updateEployeeCounter();
+    }
+
+    showEmployees() {
+      var self = this;
+      self.model.read((data) => {
         self.view.render("showEmployees", { arr: data });
       });
       self.updateEployeeCounter();
-    };
+    }
 
-    removeEmployee = function (id) {
-      // var self = this;
-      self.model.remove(id, function (data) {
-        self.view.render("removeEmployee", data);
-      });
-    };
-    addFilters = function (event) {
+    fireEmployee(id) {
+      var self = this;
+      self.model.update(function (data) {
+        self.view.render("fireEmployee", data);
+      }, id);
+    }
+
+    applyFilters(event) {
+      var self = this;
       event.preventDefault();
-      const { sort, ...filters } = gfd(event);
-      self.model.read(filters, function (data) {
+
+      const { sort, ...filters } = getFormData(event);
+
+      self.model.read(filters, (data) => {
         self.updateEployeeCounter(data);
         self.view.render("showEmployees", { sort: sort, arr: data });
       });
-    };
-    startView = function () {
-      // var self = this;
+    }
+
+    startView() {
+      var self = this;
       self.showEmployees();
-    };
+    }
 
     updateEployeeCounter = function (data) {
-      var callback = function (dt) {
+      var self = this;
+      var callback = (dt) => {
         self.view.render("employeeCounter", dt);
       };
       if (!data) {
@@ -72,6 +79,7 @@
       }
     };
   }
+
   window.app = window.app || {};
   window.app.Controller = Controller;
 })(window);
