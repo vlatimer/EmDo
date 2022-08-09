@@ -18,10 +18,18 @@
         creationTime: formatDate(tmp_date),
         deletionTime: null,
         deletionDate: null,
+        //need for filters
         education: data["education"] || "",
         sex: data["sex"],
         ageText: toStringAge(calculateAge(data["age"])),
         status: "work",
+        //need for sort
+        fullName:
+          toCapitalLetter(data["surname"]) +
+          toCapitalLetter(data["name"]) +
+          toCapitalLetter(data["patronymic"]),
+        fullTimeCreate: tmp_date.getTime(),
+        fullTimeDelete: null,
       };
 
       this.storage.save(newEmployee, callback);
@@ -34,6 +42,7 @@
         deletionDate: deletionDate,
         deletionTime: deletionTime,
         status: "del",
+        fullTimeDelete: deletionDate.getTime(),
       };
       this.storage.save(updateData, callback, id);
     }
@@ -46,12 +55,13 @@
         this.storage.findAll(callback);
       } else {
         const filtersObj = {};
-        for (let filter in data) {
-          if (data[filter] !== "all") {
-            filtersObj[filter] = data[filter];
+        for (let filter in data.filters) {
+          if (data.filters[filter] !== "all") {
+            filtersObj[filter] = data.filters[filter];
           }
         }
-        this.storage.find(filtersObj, callback);
+        const orderQuery = data.sort;
+        this.storage.find(filtersObj, callback, orderQuery);
       }
     };
 

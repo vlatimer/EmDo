@@ -13,23 +13,36 @@
       callback.call(this, JSON.parse(localStorage.getItem(name)));
     }
 
-    find = function (query, callback) {
+    find = function (query, callback, order) {
       if (!callback) {
         return;
       }
 
       var emdos = JSON.parse(localStorage.getItem(this.dbName));
-      console.log(query);
-      callback(
-        emdos.filter(function (em) {
-          for (var q in query) {
-            if (query[q] !== em[q]) {
-              return false;
-            }
+      emdos = emdos.filter(function (em) {
+        for (var q in query) {
+          if (query[q] !== em[q]) {
+            return false;
           }
-          return true;
-        })
-      );
+        }
+        return true;
+      });
+      console.log(order);
+      if (order) {
+        emdos = emdos.sort((a, b) => {
+          let first = a[order] || Infinity;
+          let second = b[order] || Infinity;
+
+          if (first > second) {
+            return 1;
+          } else if (first < second) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+      }
+      callback(emdos);
     };
 
     findAll = function (callback) {

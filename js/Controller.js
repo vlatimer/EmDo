@@ -55,10 +55,9 @@
       event.preventDefault();
 
       const { sort, ...filters } = getFormData(event);
-
-      self.model.read(filters, (data) => {
+      self.model.read({ filters: filters, sort: sort }, (data) => {
         self.updateEployeeCounter(data);
-        self.view.render("showEmployees", { sort: sort, arr: data });
+        self.view.render("showEmployees", { arr: data });
       });
     }
 
