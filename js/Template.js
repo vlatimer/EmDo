@@ -1,7 +1,7 @@
 (function (window) {
   class Template {
     constructor() {
-      this.defaultTemplate = `
+      this.defaultTemplate = (employee) => `
         <div class="em" data-id={{id}}>
           <div class="em__header-box">
             <h2 class="em__header">{{surname}}</h2>
@@ -14,81 +14,50 @@
               <i class="fa-solid fa-clock-rotate-left fa-2x"></i>
               <p>{{creationTime}}</p>
             </div>
-            <div class="em__time-delete em__block">
-              <i class="fa-solid fa-clock-rotate-left fa-2x"></i>
-              <p>{{deleteTime}}</p>
-            </div>
+              ${
+                employee.deletedAt
+                  ? `<div class="em__time-delete em__block">
+                        <i class="fa-solid fa-clock-rotate-left fa-2x"></i>
+                        <p>{{deletionTime}}</p>
+                      </div>`
+                  : ""
+              }
           </div>
           <div class="em__sex-{{sex}} em__block">
-            {{iconSex}}
+            ${
+              employee.sex === "man"
+                ? `<i class="fa-solid fa-mars fa-2x"></i>`
+                : `<i class="fa-solid fa-venus fa-2x"></i>`
+            }
             <p>{{sexName}}</p>
           </div>
-          <div class="{{educated?}} em__education em__block">
-            <i class="fa-solid fa-building-columns fa-2x"></i>
-            <p>Высшее образование</p>
-          </div>
+          ${
+            employee.education
+              ? `<div class = "em__education em__block">
+                    <i class="fa-solid fa-building-columns fa-2x"></i>
+                    <p>Высшее образование</p>
+                </div>`
+              : ""
+          }
+          ${
+            employee.deletedAt
+              ? ""
+              : `<button class="em__destroy"><i class="fa-solid fa-user-minus fa-2x"></i></button>`
+          }
         </div>`;
-      this.defaultTemplateWithOutDeleteTime = `
-        <div class="em" data-id={{id}}>
-          <div class="em__header-box">
-            <h2 class="em__header">{{surname}}</h2>
-            <h2 class="em__header">{{name}}</h2>
-            <h2 class="em__header">{{patronymic}}</h2>
-            <p class="em__date">Возраст: {{age}} лет</p>
-          </div>
-          <div class="em__time-box">
-            <div class="em__time-create em__block">
-              <i class="fa-solid fa-clock-rotate-left fa-2x"></i>
-              <p>{{creationTime}}</p>
-            </div>
-          </div>
-          <div class="em__sex-{{sex}} em__block">
-            {{iconSex}}
-            <p>{{sexName}}</p>
-          </div>
-          <div class="{{educated?}} em__education em__block">
-            <i class="fa-solid fa-building-columns fa-2x"></i>
-            <p>Высшее образование</p>
-          </div>
-          <button class="em__destroy"><i class="fa-solid fa-user-minus fa-2x"></i></button>
-        </div>`;
-      this.defaultTemplateDeleteTime = `
-        <div class="em__time-delete em__block">
-          <i class="fa-solid fa-clock-rotate-left fa-2x"></i>
-          <p>{{deleteTime}}</p>
-        </div>;`;
     }
 
-    show(data) {
+    show(data, temp) {
       var i, l;
       var view = "";
 
       for (i = 0, l = data.length; i < l; i++) {
-        var template;
-        // detected if item is deleted
-        if (!data[i].deletionTime) {
-          template = this.defaultTemplateWithOutDeleteTime;
-        } else {
-          template = this.defaultTemplate;
-          template = template.replace("{{deleteTime}}", data[i].deletionTime);
-        }
-        // detected if item gender is man or woman
+        var template = temp || this.defaultTemplate(data[i]);
+
         if (data[i].sex === "man") {
           template = template.replace("{{sexName}}", "Мужчина");
-          template = template.replace(
-            "{{iconSex}}",
-            '<i class="fa-solid fa-mars fa-2x"></i>'
-          );
         } else {
           template = template.replace("{{sexName}}", "Женщина");
-          template = template.replace(
-            "{{iconSex}}",
-            '<i class="fa-solid fa-venus fa-2x"></i>'
-          );
-        }
-        //checking if person educated
-        if (data[i].education) {
-          template = template.replace("{{educated?}}", "visible");
         }
 
         template = template.replace("{{id}}", data[i].id);
@@ -99,19 +68,16 @@
         template = template.replace("{{creationTime}}", data[i].creationTime);
         template = template.replace("{{deletionTime}}", data[i].deletionTime);
         template = template.replace("{{sex}}", data[i].sex);
-        template = template.replace("{{educated?}}", "unvisible");
 
         view = view + template;
       }
       return view;
     }
 
-    fireEmployee(dt) {
-      var template = this.defaultTemplateDeleteTime;
+    fireEmployee(data) {
+      var template = this.defaultTemplate(data);
 
-      template = template.replace("{{deleteTime}}", dt);
-
-      return template;
+      return this.show([data], template);
     }
 
     employeeCounter(count) {

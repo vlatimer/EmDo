@@ -1,82 +1,62 @@
 (function (window) {
   class Controller {
     constructor(view, model) {
-      var self = this;
+      this.view = view;
+      this.model = model;
 
-      self.view = view;
-      self.model = model;
-
-      self.view.bind("newEmployee", this.addEmployee.bind(this));
-      self.view.bind("applyFilters", this.applyFilters.bind(this));
-      self.view.bind("EmployeeFire", this.fireEmployee.bind(this));
+      this.view.bind("newEmployee", this.addEmployee.bind(this));
+      this.view.bind("applyFilters", this.applyFilters.bind(this));
+      this.view.bind("EmployeeFire", this.fireEmployee.bind(this));
     }
 
     addTestEmployee(data) {
-      var self = this;
-      self.model.create(data, () => {
-        self.view.render("clearForm");
-        self.showEmployees();
+      this.model.create(data, () => {
+        this.view.render("clearForm");
+        this.showEmployees();
       });
-      self.updateEployeeCounter();
     }
 
     addEmployee(event) {
-      var self = this;
       event.preventDefault();
       const data = getFormData(event);
 
-      if (self.model.isValid(data)) {
-        self.model.create(data, () => {
-          self.view.render("clearForm");
-          self.showEmployees();
+      if (app.Employee.isValid(data)) {
+        this.model.create(data, () => {
+          this.view.render("clearForm");
+          this.showEmployees();
         });
       }
-
-      self.updateEployeeCounter();
     }
 
     showEmployees() {
-      var self = this;
-      self.model.read((data) => {
-        self.view.render("showEmployees", { arr: data });
+      let filter = {};
+      let sort = "";
+      this.model.read({ filters: filter, sort: sort }, (data) => {
+        this.view.render("showEmployees", { arr: data });
+        this.view.render("employeeCounter", data.length);
       });
-      self.updateEployeeCounter();
     }
 
     fireEmployee(id) {
-      var self = this;
-      self.model.update(function (data) {
-        self.view.render("fireEmployee", data);
-      }, id);
+      this.model.fire(id, (data) => {
+        this.view.render("fireEmployee", data);
+      });
     }
 
     applyFilters(event) {
-      var self = this;
       event.preventDefault();
 
       const { sort, ...filters } = getFormData(event);
-      self.model.read({ filters: filters, sort: sort }, (data) => {
-        self.updateEployeeCounter(data);
-        self.view.render("showEmployees", { arr: data });
+
+      this.model.read({ filters: filters, sort: sort }, (data) => {
+        this.view.render("showEmployees", { arr: data });
+        this.view.render("employeeCounter", data.length);
       });
     }
 
     startView() {
-      var self = this;
-      self.showEmployees();
+      this.showEmployees();
     }
-
-    updateEployeeCounter = function (data) {
-      var self = this;
-      var callback = (dt) => {
-        self.view.render("employeeCounter", dt);
-      };
-      if (!data) {
-        self.model.getLength(callback);
-      } else {
-        self.model.getLength(data, callback);
-      }
-    };
   }
 
   window.app = window.app || {};

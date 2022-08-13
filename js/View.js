@@ -8,31 +8,29 @@
       this.$filterForm = qs(".additional__form");
     }
 
-    _fireEmployee = function (id, dt) {
-      var elem = qs('[data-id="' + id + '"]');
-      var timediv = qs(".em__time-box", elem);
+    _fireEmployee = function (data) {
+      var elem = qs('[data-id="' + data.id + '"]');
 
-      if (timediv) {
-        timediv.innerHTML = timediv.innerHTML + this.template.fireEmployee(dt);
-        let destroyButton = qs(".em__destroy", elem);
-        destroyButton.style.display = "none";
+      if (data.deletedAt) {
+        elem.replaceWith(
+          createElementFromHTML(this.template.fireEmployee(data))
+        );
       }
     };
 
     render(command, parameter) {
-      var self = this;
       switch (command) {
         case "showEmployees":
-          self.$emdoList.innerHTML = self.template.show(parameter.arr);
+          this.$emdoList.innerHTML = this.template.show(parameter.arr);
         case "clearForm":
-          self.$createForm.reset();
+          this.$createForm.reset();
           break;
         case "fireEmployee":
-          self._fireEmployee(parameter.id, parameter.deletionTime);
+          this._fireEmployee(parameter);
           break;
         case "employeeCounter":
-          self.$employeeCounter.innerHTML =
-            self.template.employeeCounter(parameter);
+          this.$employeeCounter.innerHTML =
+            this.template.employeeCounter(parameter);
       }
     }
 
@@ -45,13 +43,13 @@
       var self = this;
       switch (command) {
         case "newEmployee":
-          $event(self.$createForm, "submit", callback);
+          $event(this.$createForm, "submit", callback);
           break;
         case "applyFilters":
-          $event(self.$filterForm, "submit", callback);
+          $event(this.$filterForm, "submit", callback);
           break;
         case "EmployeeFire":
-          $ppevent(self.$emdoList, ".em__destroy", "click", function () {
+          $ppevent(this.$emdoList, ".em__destroy", "click", function () {
             callback(self._itemId(this));
           });
       }
