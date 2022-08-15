@@ -80,7 +80,7 @@
                     </div>
                     <div class="additional__filter filter">
                         <label for="age-filter" class="filter__name">Возраст:</label>
-                        <select id="age-filter" class="filter__box" name="ageText">
+                        <select id="age-filter" class="filter__box" name="age">
                             <option value="all">Все</option>
                             <option value="teen">до 25</option>
                             <option value="adult">от 25 до 45</option>
@@ -108,21 +108,22 @@
                     <h2 class="additional__sort-header">Сортировка</h2>
                     <div class="additional__radio-box">
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="alfabet" name="sort" value="fullName">
+                            <input class="additional__radio" type="radio" id="alfabet" name="sorting"
+                                value="byFullName">
                             <label class="additional__label" for="alfabet">По Алфавиту</label>
                         </div>
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="creation" name="sort"
-                                value="fullTimeCreate">
+                            <input class="additional__radio" type="radio" id="creation" name="sorting"
+                                value="byTimeCreated">
                             <label class="additional__label" for="creation">По Дате Приема</label>
                         </div>
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="deletion" name="sort"
-                                value="fullTimeDelete">
+                            <input class="additional__radio" type="radio" id="deletion" name="sorting"
+                                value="byTimeDeleted">
                             <label class="additional__label" for="deletion">По Дате Увольнения</label>
                         </div>
                         <div class="additional__radio-wrapper">
-                            <input class="additional__radio" type="radio" id="without" name="sort" value="" checked>
+                            <input class="additional__radio" type="radio" id="without" name="sorting" value="" checked>
                             <label class="additional__label" for="without">Без Сортировки</label>
                         </div>
                     </div>
@@ -133,8 +134,9 @@
         </div>
     </div>
     <script src="./js/helpers.js"></script>
+    <script src="./js/filters.js"></script>
+    <script src="./js/sorters.js"></script>
     <script src="./js/TestData.js"></script>
-    <script src="./js/Employee.js"></script>
     <script src="./js/Store.js"></script>
     <script src="./js/Template.js"></script>
     <script src="./js/View.js"></script>

@@ -20,7 +20,7 @@
       event.preventDefault();
       const data = getFormData(event);
 
-      if (app.Employee.isValid(data)) {
+      if (this.model.isValid(data)) {
         this.model.create(data, () => {
           this.view.render("clearForm");
           this.showEmployees();
@@ -29,9 +29,7 @@
     }
 
     showEmployees() {
-      let filter = {};
-      let sort = "";
-      this.model.read({ filters: filter, sort: sort }, (data) => {
+      this.model.read(null, null, (data) => {
         this.view.render("showEmployees", { arr: data });
         this.view.render("employeeCounter", data.length);
       });
@@ -46,9 +44,8 @@
     applyFilters(event) {
       event.preventDefault();
 
-      const { sort, ...filters } = getFormData(event);
-
-      this.model.read({ filters: filters, sort: sort }, (data) => {
+      const { sorting, ...filters } = getFormData(event);
+      this.model.read(filters, sorting, (data) => {
         this.view.render("showEmployees", { arr: data });
         this.view.render("employeeCounter", data.length);
       });

@@ -4,11 +4,23 @@
       this.storage = storage;
     }
 
-    create = function (data, callback) {
+    create(data, callback) {
       callback = callback || function () {};
 
+      data = {
+        name: toCapitalLetter(data.name),
+        surname: toCapitalLetter(data.surname),
+        patronymic: toCapitalLetter(data.patronymic),
+        age: calculateAge(data.age),
+        sex: data.sex,
+        education: data.education || "",
+        status: "work",
+        createdAt: new Date(),
+        deletedAt: null,
+      };
+
       this.storage.create(data, callback);
-    };
+    }
 
     fire(id, callback) {
       const updateData = {
@@ -22,21 +34,39 @@
       this.storage.update(updateData, id, callback);
     }
 
-    read = function (data, callback) {
-      const filtersObj = {};
-
-      for (let filter in data.filters) {
-        if (data.filters[filter] !== "all") {
-          filtersObj[filter] = data.filters[filter];
+    read(filters, sorting, callback) {
+      if (filters) {
+        for (let filter in filters) {
+          if (filters[filter] === "all") {
+            delete filters[filter];
+          }
         }
       }
-      const orderQuery = data.sort;
-      this.storage.find(filtersObj, orderQuery, callback);
-    };
 
-    remove = function (id, callback) {
+      if (sorting) {
+        // TODO: connect asc/desc
+        sorting = app.sorters[sorting]();
+      }
+
+      this.storage.find(filters, sorting, callback);
+    }
+
+    remove(id, callback) {
       this.storage.remove(id, callback);
-    };
+    }
+
+    isValid(data) {
+      if (
+        data.name.trim() &&
+        data.surname.trim() &&
+        data.patronymic.trim() &&
+        data.age.trim()
+      ) {
+        return true;
+      }
+
+      return false;
+    }
   }
 
   window.app = window.app || {};

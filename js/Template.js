@@ -1,4 +1,24 @@
 (function (window) {
+  function creationTime(item) {
+    let createdAt = item.createdAt;
+
+    if (typeof createdAt === "string") {
+      createdAt = new Date(createdAt);
+    }
+
+    return formatDate(createdAt);
+  }
+
+  function deletionTime(item) {
+    let deletedAt = item.deletedAt;
+
+    if (typeof deletedAt === "string") {
+      deletedAt = new Date(deletedAt);
+    }
+
+    return deletedAt ? formatDate(deletedAt) : "";
+  }
+
   class Template {
     constructor() {
       this.defaultTemplate = (employee) => `
@@ -65,8 +85,8 @@
         template = template.replace("{{surname}}", data[i].surname);
         template = template.replace("{{patronymic}}", data[i].patronymic);
         template = template.replace("{{age}}", data[i].age);
-        template = template.replace("{{creationTime}}", data[i].creationTime);
-        template = template.replace("{{deletionTime}}", data[i].deletionTime);
+        template = template.replace("{{creationTime}}", creationTime(data[i]));
+        template = template.replace("{{deletionTime}}", deletionTime(data[i]));
         template = template.replace("{{sex}}", data[i].sex);
 
         view = view + template;

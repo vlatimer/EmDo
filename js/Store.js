@@ -13,38 +13,34 @@
       callback.call(this, JSON.parse(localStorage.getItem(name)));
     }
 
-    find(query, order, callback) {
+    find(filters, sorting, callback) {
       if (!callback) {
-        return;
+        throw new Error("callback must be provided");
       }
+      let data = JSON.parse(localStorage.getItem(this.dbName));
 
-      var emdos = JSON.parse(localStorage.getItem(this.dbName));
-      emdos = emdos.map((em) => new app.Employee(em));
+      if (filters) {
+        data = data.filter(function (item) {
+          let _return = true;
 
-      emdos = emdos.filter(function (em) {
-        for (var q in query) {
-          if (query[q] !== em[q]) {
-            return false;
+          for (let key in filters) {
+            let value = filters[key];
+
+            if (typeof app.filters[value] === "function") {
+              _return = _return && app.filters[value](item[key]);
+            } else {
+              _return = _return && item[key] === value;
+            }
           }
-        }
-        return true;
-      });
-      if (order) {
-        emdos = emdos.sort((a, b) => {
-          let first = a[order] || Infinity;
-          let second = b[order] || Infinity;
-          console.log(first, second);
-          if (first > second) {
-            return 1;
-          } else if (first < second) {
-            return -1;
-          } else {
-            return 0;
-          }
+          return _return;
         });
       }
-      console.log(order);
-      callback(emdos);
+
+      if (sorting) {
+        data = data.sort(sorting);
+      }
+
+      callback(data);
     }
 
     update(updateData, id, callback) {
@@ -64,23 +60,22 @@
         }
       }
       localStorage.setItem(this.dbName, JSON.stringify(emdos));
-      callback(new app.Employee(item));
+      callback(item);
     }
 
-    create = function (data, callback) {
-      var emdos = JSON.parse(localStorage.getItem(this.dbName)) || [];
-
+    create(data, callback) {
       callback = callback || function () {};
 
-      let newEmdo = app.Employee.build(data);
-      let dbData = newEmdo.toDbData();
+      const emdos = JSON.parse(localStorage.getItem(this.dbName)) || [];
 
-      emdos.push(dbData);
+      data.id = new Date().getTime() - getRandomNumber(1, 10000);
+      emdos.push(data);
+
       localStorage.setItem(this.dbName, JSON.stringify(emdos));
-      callback(newEmdo);
-    };
+      callback(data);
+    }
 
-    remove = function (id, callback) {
+    remove(id, callback) {
       var emdos = JSON.parse(localStorage.getItem(this.dbName));
 
       for (let i = 0; i < emdos.length; i++) {
@@ -91,7 +86,7 @@
       }
       localStorage.setItem(this.dbName, JSON.stringify(emdos));
       callback(id);
-    };
+    }
   }
   window.app = window.app || {};
   window.app.Store = Store;
