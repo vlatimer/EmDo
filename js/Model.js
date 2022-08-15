@@ -40,6 +40,9 @@
           if (filters[filter] === "all") {
             delete filters[filter];
           }
+          if (filter === "age") {
+            filters[filter] = app.filters[filters[filter]];
+          }
         }
       }
 

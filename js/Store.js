@@ -26,8 +26,8 @@
           for (let key in filters) {
             let value = filters[key];
 
-            if (typeof app.filters[value] === "function") {
-              _return = _return && app.filters[value](item[key]);
+            if (typeof value === "function") {
+              _return = _return && value(item[key]);
             } else {
               _return = _return && item[key] === value;
             }
