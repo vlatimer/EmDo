@@ -23,9 +23,9 @@
         data = data.filter(function (item) {
           let _return = true;
 
+          console.log(filters);
           for (let key in filters) {
             let value = filters[key];
-
             if (typeof value === "function") {
               _return = _return && value(item[key]);
             } else {
@@ -39,7 +39,7 @@
       if (sorting) {
         data = data.sort(sorting);
       }
-
+      console.log(data);
       callback(data);
     }
 

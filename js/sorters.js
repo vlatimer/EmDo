@@ -14,6 +14,7 @@
       return 0;
     };
   }
+
   function byFullName(sortOrder) {
     const fullName = (item) => item.surname + item.name + item.patronymic;
 
@@ -54,6 +55,7 @@
       return 0;
     };
   }
+
   function byTimeDeleted(sortOrder) {
     const fullTimeDelete = (item) => {
       let deletedAt = item.deletedAt;
@@ -79,6 +81,7 @@
       return 0;
     };
   }
+
   window.app = window.app || {};
   window.app.sorters = {
     byAge,

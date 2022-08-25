@@ -21,7 +21,7 @@
     render(command, parameter) {
       switch (command) {
         case "showEmployees":
-          this.$emdoList.innerHTML = this.template.show(parameter.arr);
+          this.$emdoList.innerHTML = this.template.show(parameter);
         case "clearForm":
           this.$createForm.reset();
           break;

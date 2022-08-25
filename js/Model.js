@@ -39,8 +39,10 @@
         for (let filter in filters) {
           if (filters[filter] === "all") {
             delete filters[filter];
+            continue;
           }
           if (filter === "age") {
+            // age : f "teen"
             filters[filter] = app.filters[filters[filter]];
           }
         }

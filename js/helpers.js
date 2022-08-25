@@ -75,18 +75,6 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  window.toStringAge = function (age) {
-    if (age < 25) {
-      return "teen";
-    }
-    if (25 <= age && age < 45) {
-      return "adult";
-    }
-    if (45 <= age) {
-      return "old";
-    }
-  };
-
   window.createElementFromHTML = function (htmlString) {
     var div = document.createElement("div");
     div.innerHTML = htmlString.trim();

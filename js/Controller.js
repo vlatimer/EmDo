@@ -30,7 +30,7 @@
 
     showEmployees() {
       this.model.read(null, null, (data) => {
-        this.view.render("showEmployees", { arr: data });
+        this.view.render("showEmployees", data);
         this.view.render("employeeCounter", data.length);
       });
     }
@@ -46,7 +46,7 @@
 
       const { sorting, ...filters } = getFormData(event);
       this.model.read(filters, sorting, (data) => {
-        this.view.render("showEmployees", { arr: data });
+        this.view.render("showEmployees", data);
         this.view.render("employeeCounter", data.length);
       });
     }
