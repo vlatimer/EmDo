@@ -1,0 +1,32 @@
+{
+    "name": "emdo",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "My emdo with express server",
+    "main": "index.js",
+    "scripts": {
+        "serve": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vlatimer/EmDo.git"
+    },
+    "keywords": [
+        "Express",
+        "NodeJS",
+        "ToDo",
+        "MVC"
+    ],
+    "author": "Vladislav Kucherenko",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vlatimer/EmDo/issues"
+    },
+    "homepage": "https://github.com/vlatimer/EmDo#readme",
+    "devDependencies": {
+        "nodemon": "^2.0.19"
+    },
+    "dependencies": {
+        "express": "^4.18.1"
+    }
+}
