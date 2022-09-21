@@ -5,10 +5,13 @@
         }
 
         async find(filters, sorting, callback) {
+            console.log(config);
             if (!callback) {
                 throw new Error("callback must be provided");
             }
-            const res = await fetch("/employees");
+            const res = await fetch(
+                `http://${config.host}:${config.port}/employees`
+            );
             let data = await res.json();
 
             if (filters) {
@@ -34,13 +37,16 @@
         }
 
         async update(updateData, id, callback) {
-            const res = await fetch(`/employees/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updateData),
-            });
+            const res = await fetch(
+                `http://${config.host}:${config.port}/employees/${id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updateData),
+                }
+            );
 
             const data = await res.json();
 
@@ -52,22 +58,28 @@
         async create(data, callback) {
             callback = callback || function () {};
 
-            const res = await fetch("/employees", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
+            const res = await fetch(
+                `http://${config.host}:${config.port}/employees`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
             const serverData = await res.json();
 
             callback(serverData);
         }
 
         async remove(id, callback) {
-            const res = await fetch(`/employees/${id}`, {
-                method: "DELETE",
-            });
+            const res = await fetch(
+                `http://${config.host}:${config.port}/employees/${id}`,
+                {
+                    method: "DELETE",
+                }
+            );
 
             callback(id);
         }
