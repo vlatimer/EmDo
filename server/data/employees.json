@@ -1,0 +1,52 @@
+{
+  "employees": [
+    {
+      "id": 1668253085395,
+      "name": "Xas",
+      "surname": "Xas",
+      "patronymic": "Xas",
+      "age": 22,
+      "sex": "man",
+      "education": "",
+      "status": "del",
+      "createdAt": "2022-11-12T11:38:08.902Z",
+      "deletedAt": "2022-11-12T11:53:32.381Z"
+    },
+    {
+      "id": 1668254023900,
+      "name": "Xsx",
+      "surname": "Sxas",
+      "patronymic": "Xas",
+      "age": 22,
+      "sex": "man",
+      "education": "",
+      "status": "del",
+      "createdAt": "2022-11-12T11:53:49.870Z",
+      "deletedAt": "2022-11-22T14:52:59.766Z"
+    },
+    {
+      "id": 1669128786346,
+      "name": "Cascx",
+      "surname": "Saxas",
+      "patronymic": "Xasxas",
+      "age": 22,
+      "sex": "man",
+      "education": "",
+      "status": "work",
+      "createdAt": "2022-11-22T14:53:08.990Z",
+      "deletedAt": null
+    },
+    {
+      "id": 1669128800636,
+      "name": "Xsa",
+      "surname": "Xasx",
+      "patronymic": "Saxas",
+      "age": 22,
+      "sex": "woman",
+      "education": "educated",
+      "status": "work",
+      "createdAt": "2022-11-22T14:53:25.182Z",
+      "deletedAt": null
+    }
+  ]
+}

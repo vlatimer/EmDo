@@ -1,7 +1,6 @@
 {
     "name": "emdo",
     "version": "1.0.0",
-    "type": "module",
     "description": "My emdo with express server",
     "main": "index.js",
     "scripts": {
@@ -27,6 +26,7 @@
         "nodemon": "^2.0.19"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "express": "^4.18.1"
     }
 }

@@ -5,14 +5,17 @@
         }
 
         async find(filters, sorting, callback) {
-            console.log(config);
             if (!callback) {
                 throw new Error("callback must be provided");
             }
             const res = await fetch(
-                `http://${config.host}:${config.port}/employees`
+                `http://${config.host}:${config.port}/employees`,
+                {
+                    method: "GET",
+                }
             );
-            let data = await res.json();
+
+            let data = (await res.json()).employees;
 
             if (filters) {
                 data = data.filter(function (item) {
@@ -49,7 +52,6 @@
             );
 
             const data = await res.json();
-
             callback = callback || function () {};
 
             callback(data);
