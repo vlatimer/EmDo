@@ -11,6 +11,21 @@ route.get("/employees", (req, res, next) => {
     next();
 });
 
+route.get("/employees/:id", (req, res, next) => {
+    const EMPLOYEES = require("./data/employees.json");
+    const id = parseInt(req.params.id, 10);
+    const person = EMPLOYEES.employees.filter((item) => {
+        if (item.id === id) {
+            return true;
+        }
+        return false;
+    });
+
+    res.status(200).json(person);
+
+    next();
+});
+
 route.post("/employees", (req, res, next) => {
     const EMPLOYEES = require("./data/employees.json");
     const newEmployee = {

@@ -1,8 +1,8 @@
-@primary: #3B2B4E;
-@secondary: #75485F;
-@third: #BF716D;
-@forth: #FF9F67;
-@fifth: #FFBD65;
+@primary: #3b2b4e;
+@secondary: #75485f;
+@third: #bf716d;
+@forth: #ff9f67;
+@fifth: #ffbd65;
 @breakpoint-xl: ~"(max-width: 1200px)";
 @breakpoint-lg: ~"(max-width:992px)";
 @breakpoint-md: ~"(max-width:768px)";
@@ -15,7 +15,6 @@
     border-bottom-left-radius: 40px;
     overflow-y: auto;
     overflow-x: hidden;
-
 
     &__header-box {
         display: grid;
@@ -34,15 +33,28 @@
     }
 
     &__header {
+        border: solid 2px transparent;
+        border-radius: 20px;
+        cursor: pointer;
         grid-column: 2;
         align-self: center;
         justify-self: center;
+
+        &-button {
+            transition: 0.5s all;
+            border: solid 2px @fifth;
+            color: @fifth;
+            background-color: @primary;
+
+            &:hover {
+                border-radius: 10px;
+            }
+        }
     }
 
     &__counter {
         grid-column: 3;
     }
-
 
     &__list {
         position: relative;
@@ -61,7 +73,6 @@
     }
 
     &::-webkit-scrollbar-thumb {
-
         border-radius: 10px;
         background-color: @primary;
 
@@ -76,7 +87,7 @@
 }
 
 .em {
-    &+& {
+    & + & {
         margin-top: 20px;
     }
 
@@ -90,15 +101,15 @@
     padding: 10px;
     grid-template: 1fr / repeat(5, 1fr);
     color: @fifth;
-    grid-template-areas:"header time sex education destroy";
+    grid-template-areas: "header time sex education destroy";
 
     @media @breakpoint-xl {
         grid-template: repeat(2, 1fr) / repeat(3, 1fr);
         height: 300px;
-        grid-template-areas: "header sex destroy"
+        grid-template-areas:
+            "header sex destroy"
             "time education destroy";
     }
-
 
     @media @breakpoint-lg {
         grid-template: 1fr / repeat(5, 1fr);
@@ -109,7 +120,8 @@
     @media @breakpoint-md {
         grid-template: repeat(2, 1fr) / repeat(3, 1fr);
         height: 250px;
-        grid-template-areas: "header sex destroy"
+        grid-template-areas:
+            "header sex destroy"
             "time education destroy";
     }
 
@@ -135,7 +147,6 @@
         color: @fifth;
         width: fit-content;
 
-
         i {
             margin-right: 10px;
         }
@@ -150,7 +161,7 @@
         &-box {
             grid-area: time;
 
-            div+div {
+            div + div {
                 margin-top: 20px;
             }
         }
@@ -169,7 +180,6 @@
     }
 
     &__sex {
-
         &-man {
             grid-area: sex;
 
@@ -216,6 +226,4 @@
             }
         }
     }
-
-
 }

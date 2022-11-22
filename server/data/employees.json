@@ -32,9 +32,9 @@
       "age": 22,
       "sex": "man",
       "education": "",
-      "status": "work",
+      "status": "del",
       "createdAt": "2022-11-22T14:53:08.990Z",
-      "deletedAt": null
+      "deletedAt": "2022-11-22T15:41:01.072Z"
     },
     {
       "id": 1669128800636,
@@ -44,8 +44,20 @@
       "age": 22,
       "sex": "woman",
       "education": "educated",
-      "status": "work",
+      "status": "del",
       "createdAt": "2022-11-22T14:53:25.182Z",
+      "deletedAt": "2022-11-22T15:41:02.176Z"
+    },
+    {
+      "id": 1669132469377,
+      "name": "Xasxas",
+      "surname": "Xsxas",
+      "patronymic": "Xasxasxasxasxasxasxasxa",
+      "age": 22,
+      "sex": "woman",
+      "education": "",
+      "status": "work",
+      "createdAt": "2022-11-22T15:54:37.295Z",
       "deletedAt": null
     }
   ]

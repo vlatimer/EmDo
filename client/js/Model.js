@@ -45,6 +45,9 @@
                         // age : f "teen"
                         filters[filter] = app.filters[filters[filter]];
                     }
+                    if (filter === "id") {
+                        this.storage.choose(filter, callback);
+                    }
                 }
             }
 

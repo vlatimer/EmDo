@@ -7,6 +7,8 @@
             this.view.bind("newEmployee", this.addEmployee.bind(this));
             this.view.bind("applyFilters", this.applyFilters.bind(this));
             this.view.bind("EmployeeFire", this.fireEmployee.bind(this));
+            this.view.bind("ChooseEmployee", this.chooseEmployee.bind(this));
+            this.view.bind("ShowAllEmployees", this.showEmployees.bind(this));
         }
 
         addTestEmployee(data) {
@@ -32,12 +34,21 @@
             this.model.read(null, null, (data) => {
                 this.view.render("showEmployees", data);
                 this.view.render("employeeCounter", data.length);
+                this.view.render("ToggleUpdateButton", false);
             });
         }
 
         fireEmployee(id) {
             this.model.fire(id, (data) => {
                 this.view.render("fireEmployee", data);
+            });
+        }
+
+        chooseEmployee(id) {
+            this.model.read({ id: id }, null, (data) => {
+                this.view.render("showEmployees", data);
+                this.view.render("employeeCounter", data.length);
+                this.view.render("ToggleUpdateButton", true);
             });
         }
 

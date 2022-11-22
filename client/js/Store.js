@@ -39,7 +39,22 @@
             callback(data);
         }
 
+        async choose(id, callback) {
+            callback = callback || function () {};
+
+            const res = await fetch(
+                `http://${config.host}:${config.port}/employees/${id}`,
+                {
+                    method: "GET",
+                }
+            );
+            const data = await res.json();
+            callback(data);
+        }
+
         async update(updateData, id, callback) {
+            callback = callback || function () {};
+
             const res = await fetch(
                 `http://${config.host}:${config.port}/employees/${id}`,
                 {
@@ -52,7 +67,6 @@
             );
 
             const data = await res.json();
-            callback = callback || function () {};
 
             callback(data);
         }

@@ -70,7 +70,6 @@
         show(data, temp) {
             var i, l;
             var view = "";
-            console.log(data);
             for (i = 0, l = data.length; i < l; i++) {
                 var template = temp || this.defaultTemplate(data[i]);
 
@@ -101,6 +100,14 @@
                 view = view + template;
             }
             return view;
+        }
+
+        toggleUpdateButton(element, bool) {
+            if (bool) {
+                element.classList.add("emdo__header-button");
+                return;
+            }
+            element.classList.remove("emdo__header-button");
         }
 
         fireEmployee(data) {
