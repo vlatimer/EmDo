@@ -35,6 +35,9 @@
                         data = data.sort(sorting);
                     }
                     callback(data);
+                })
+                .catch((e) => {
+                    console.error(e.message);
                 });
         }
 
@@ -46,6 +49,9 @@
                 .then((res) => res.json())
                 .then((data) => {
                     callback([data]);
+                })
+                .catch((e) => {
+                    console.error(e.message);
                 });
         }
 
@@ -60,7 +66,10 @@
                 body: JSON.stringify(updateData),
             })
                 .then((res) => res.json())
-                .then((data) => callback(data));
+                .then((data) => callback(data))
+                .catch((e) => {
+                    console.error(e.message);
+                });
         }
 
         create(data, callback) {
@@ -78,6 +87,9 @@
                 })
                 .then((serverData) => {
                     callback(serverData);
+                })
+                .catch((e) => {
+                    console.error(e.message);
                 });
         }
 

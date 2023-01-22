@@ -26,6 +26,7 @@ route.post("/employees", (req, res, next) => {
         id: new Date().getTime() - getRandomNumber(1, 10000),
         ...req.body,
     };
+    console.log(newEmployee);
     EMPLOYEES.employees.push(newEmployee);
 
     fs.writeFileSync(
