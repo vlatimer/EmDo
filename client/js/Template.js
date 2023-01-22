@@ -5,7 +5,6 @@
         if (typeof createdAt === "string") {
             createdAt = new Date(createdAt);
         }
-
         return formatDate(createdAt);
     }
 

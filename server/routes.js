@@ -1,4 +1,3 @@
-const e = require("express");
 const express = require("express");
 const fs = require("fs");
 
@@ -6,24 +5,19 @@ const route = express.Router();
 
 route.get("/employees", (req, res, next) => {
     const EMPLOYEES = require("./data/employees.json");
-    res.status(200).json(EMPLOYEES);
-
-    next();
+    return res.status(200).json(EMPLOYEES);
 });
 
 route.get("/employees/:id", (req, res, next) => {
     const EMPLOYEES = require("./data/employees.json");
     const id = parseInt(req.params.id, 10);
-    const person = EMPLOYEES.employees.filter((item) => {
-        if (item.id === id) {
-            return true;
+    const person = EMPLOYEES.employees.find((item) => {
+        if (item.id !== id) {
+            return false;
         }
-        return false;
+        return true;
     });
-
-    res.status(200).json(person);
-
-    next();
+    return res.status(200).json(person);
 });
 
 route.post("/employees", (req, res, next) => {
@@ -38,9 +32,8 @@ route.post("/employees", (req, res, next) => {
         __dirname + "/data/employees.json",
         JSON.stringify(EMPLOYEES, null, 2)
     );
-    res.status(201).json(newEmployee);
 
-    next();
+    return res.status(201).json(newEmployee);
 });
 
 route.put("/employees/:id", (req, res, next) => {
@@ -60,8 +53,7 @@ route.put("/employees/:id", (req, res, next) => {
         }
     }
 
-    res.status(200).json(item);
-    next();
+    return res.status(200).json(item);
 });
 
 route.delete("/employees/:id", (req, res, next) => {

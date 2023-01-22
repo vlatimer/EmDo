@@ -39,13 +39,13 @@
         }
 
         fireEmployee(id) {
-            this.model.fire(id, (data) => {
+            this.model.onePersonAct(id, { operation: "fire" }, (data) => {
                 this.view.render("fireEmployee", data);
             });
         }
 
         chooseEmployee(id) {
-            this.model.read({ id: id }, null, (data) => {
+            this.model.onePersonAct(id, { operation: "choose" }, (data) => {
                 this.view.render("showEmployees", data);
                 this.view.render("employeeCounter", data.length);
                 this.view.render("ToggleUpdateButton", true);

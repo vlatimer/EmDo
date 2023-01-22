@@ -22,14 +22,6 @@
             this.storage.create(data, callback);
         }
 
-        fire(id, callback) {
-            const updateData = {
-                deletedAt: new Date(),
-                status: "del",
-            };
-            this.update(updateData, id, callback);
-        }
-
         update(updateData, id, callback) {
             this.storage.update(updateData, id, callback);
         }
@@ -45,9 +37,6 @@
                         // age : f "teen"
                         filters[filter] = app.filters[filters[filter]];
                     }
-                    if (filter === "id") {
-                        this.storage.choose(filter, callback);
-                    }
                 }
             }
 
@@ -59,8 +48,23 @@
             this.storage.find(filters, sorting, callback);
         }
 
-        remove(id, callback) {
-            this.storage.remove(id, callback);
+        onePersonAct(id, atcion, callback) {
+            // operationList = ["remove", "fire", "choose"]
+            switch (atcion["operation"]) {
+                case "fire":
+                    const updateData = {
+                        deletedAt: new Date(),
+                        status: "del",
+                    };
+                    this.update(updateData, id, callback);
+                    break;
+                case "choose":
+                    this.storage.choose(id, callback);
+                    break;
+                case "remove":
+                    this.storage.remove(id, callback);
+                    break;
+            }
         }
 
         isValid(data) {
